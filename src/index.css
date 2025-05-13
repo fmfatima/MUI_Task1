@@ -1,8 +1,9 @@
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
   /*line-height: 1.5;*/
   font-weight: 400;
-
+  
   /*color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;*/
@@ -12,14 +13,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to bottom, #f9c5e3, #f0caec, #e7cff3, #ded4f7, #d6d8f9, #d3d8fa, #d1d7fa, #ced7fb, #d0d2fb, #d3cdfb, #d8c7f9, #dec1f6);
+}
+h2{
+  font-family: "Lora", serif;;
+}
 
 a {
   font-weight: 500;
-  color: #ffffff;
+  color: #000000;
   text-decoration: inherit;
 }
 a:hover {
-  color: #151515;
+  color: #d41414;
+  font-size: large;
 }
 
 body {
@@ -44,7 +54,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #152153;
+  border-color: #000000;
 }
 button:focus,
 button:focus-visible {

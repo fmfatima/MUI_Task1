@@ -28,13 +28,13 @@ const testimonials = [
     image: '/src/assets/card.jpg'
   },
   {
-    name: 'john',
+    name: 'John',
     location: 'Brooklyn, NY',
     quote: 'I was tired of searching WebMD and other sites. I wanted to find honest sources and thoughts as to what I was going through.',
     image: '/src/assets/card.jpg'
   },
   {
-    name: 'Priya ',
+    name: 'Priya',
     location: 'Brooklyn, NY',
     quote: 'I was tired of searching WebMD and other sites. I wanted to find honest sources and thoughts as to what I was going through.',
     image: '/src/assets/card.jpg'
@@ -65,48 +65,100 @@ const Testimonial = () => {
         These are thousands of people whose lives have changed. We can't show their faces due to privacy protections, but we can share their voices.
       </Typography>
 
-      <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <IconButton onClick={handlePrev} sx={{ position: 'absolute', left: 0, zIndex: 1 }}>
+      <Box sx={{ position: 'relative', display: 'flex', alignItems: 'start', justifyContent: 'center' }}>
+        <IconButton onClick={handlePrev} sx={{ position: 'absolute', left: 0, zIndex: 2 }}>
           <ArrowBackIos />
         </IconButton>
 
         <Box
           sx={{
-            display: 'flex', overflow: 'hidden', gap: 3, maxWidth: '1000px',  px: 2,
+            position: 'relative',
+            width: '100%',
+            maxWidth: '1000px',
+            height: 420,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          {testimonials.slice(index, index + 3).map((item, idx) => (
-            <Card
-              key={idx}
+          {[...Array(5)].map((_, i) => {
+        const offset = i - 2; 
+        const currentIdx = (index + offset + testimonials.length) % testimonials.length;
+        const item = testimonials[currentIdx];
+
+        let scale, translateX, zIndex;
+
+        switch (offset) {
+          case 0:
+            scale = 1;
+            translateX = '0%';
+            zIndex = 3;
+            break;
+          case -1:
+          case 1:
+            scale = 0.85;
+            translateX = `${offset * 100}%`;
+            zIndex = 2;
+            break;
+          case -2:
+          case 2:
+            scale = 0.75;
+            translateX = `${offset * 95}%`;
+            zIndex = 1;
+            break;
+          default:
+            scale = 0.7;
+            translateX = '0%';
+            zIndex = 0;
+        }
+
+        return (
+          <Card
+            key={currentIdx}
+            sx={{
+              position: 'absolute',
+              width: 280,
+              height: 380,
+              borderRadius: 3,
+              overflow: 'hidden',
+              backgroundImage: `url(${item.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              display: 'flex',
+              alignItems: 'flex-end',
+              color: 'black',
+              transform: `translateX(${translateX}) scale(${scale})`,
+              transition: 'transform 0.5s ease, z-index 0.5s',
+              zIndex,
+              border: '0.5px solid #0080ff',
+            }}
+          >
+            <CardContent
               sx={{
-                position: 'relative',  width: 300,
-                height: 400, borderRadius: 3,
-                overflow: 'hidden', backgroundImage: `url(${item.image})`,
-                backgroundSize: 'cover', backgroundPosition: 'center',
-                flexShrink: 0, display: 'flex',
-                alignItems: 'flex-end', color: 'white'
+                opacity: '0.75',
+                width: '100%',
+                backgroundColor: 'rgba(103, 58, 183, 0.85)',
+                borderRadius: '16px',
+                m: 2,
+                p: 2,
+                textAlign: 'left',
+                color: 'white',
+                border: '0.5px solid #0080ff',
               }}
             >
-              <CardContent
-                sx={{
-                  width: '100%',
-                  backgroundColor: 'rgba(103, 58, 183, 0.85)', // Purple with opacity
-                  borderRadius: '16px', m: 2,  p: 2,
-                  textAlign: 'left', color: 'white',
-                }}
-              >
-                <FormatQuote sx={{ fontSize: 40, color: 'white', mb: 1 }} />
-                <Typography variant="body1" sx={{ mb: 2 }}>
-                  {item.quote}
-                </Typography>
-                <Typography variant="h6">{item.name}</Typography>
-                <Typography variant="subtitle2">{item.location}</Typography>
-              </CardContent>
-            </Card>
-          ))}
+              <FormatQuote sx={{ fontSize: 40, color: 'white', mb: 1, display: 'block', mx: 'auto'}} />
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                {item.quote}
+              </Typography>
+              <Typography variant="h6">{item.name}</Typography>
+              <Typography variant="subtitle2">{item.location}</Typography>
+            </CardContent>
+          </Card>
+        );
+      })}
         </Box>
 
-        <IconButton onClick={handleNext} sx={{ position: 'absolute', right: 0, zIndex: 1 }}>
+        <IconButton onClick={handleNext} sx={{ position: 'absolute', right: 0, zIndex: 2 }}>
           <ArrowForwardIos />
         </IconButton>
       </Box>

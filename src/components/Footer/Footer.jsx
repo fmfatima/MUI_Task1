@@ -12,7 +12,7 @@ const Footer = () => {
         setSelected(newSelected);
     };
     return (
-    <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', borderRadius:'20px 20px 0 0' }}>
         <Toolbar>
         <Stack direction="row" spacing={2} sx={{flexGrow: 1}}>
             <Typography variant="body2"><a href="#">Match With A Provider</a></Typography>
@@ -24,7 +24,7 @@ const Footer = () => {
         </Stack>
 
         <Stack direction="row" spacing={2}>
-            <Button color='inherit'>Follow Us</Button>
+            <Button color='inherit' sx={{color:'blue', fontWeight:'500'}}>Follow Us <p>&#128153;</p></Button>
         </Stack>
         </Toolbar>
         <Toolbar>
@@ -36,7 +36,7 @@ const Footer = () => {
 
         <Stack direction="row" spacing={2}>
         <ToggleButtonGroup value={selected} onChange={handleChange} aria-label="social media"
-        size="small" >
+        size="small" sx={{'& .MuiToggleButton-root':{mx:1, color:'black', border:'none'} }}>
 
             <ToggleButton value="instagram" aria-label="instagram">
             <InstagramIcon />
